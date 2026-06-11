@@ -218,8 +218,8 @@ function Solution() {
           className="relative aspect-[4/5] overflow-hidden"
         >
           <img
-            src={solution}
-            alt="Assessora da J&M organizando o cronograma"
+            src={jessika}
+            alt="Jessika, fundadora da J&M Assessoria"
             loading="lazy"
             width={1200}
             height={1400}
@@ -229,31 +229,39 @@ function Solution() {
         </motion.div>
 
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="flex flex-col justify-center">
-          <span className="eyebrow">A solução</span>
+          <span className="eyebrow">Fundadora da J&amp;M</span>
           <h2 className="mt-4 font-display text-4xl leading-tight md:text-6xl">
-            Conheça a <em className="text-gold">J&amp;M</em> — a assessoria que
-            cuida de tudo para você só precisar dizer sim.
+            Prazer, eu sou a <em className="text-gold">Jessika</em>.
           </h2>
           <p className="mt-8 text-base leading-relaxed text-ivory/75 md:text-lg">
-            Nossa equipe assume o planejamento, a curadoria de fornecedores, os
-            cronogramas, os imprevistos e a execução do dia. Você ganha de volta
-            o que mais importa: <em className="text-gold">presença, emoção e tempo</em> ao
-            lado de quem ama.
+            Sou apaixonada por transformar sonhos em experiências inesquecíveis.
+            Meu propósito é garantir que você viva seu casamento com
+            <em className="text-gold"> leveza, segurança e emoção</em>.
           </p>
           <p className="mt-4 text-base leading-relaxed text-ivory/75 md:text-lg">
-            Mais de uma centena de casamentos depois, aprendemos que tranquilidade
-            também é um detalhe — e cuidamos dele primeiro.
+            Cada detalhe importa. Cada sorriso conta. E eu estou aqui para
+            cuidar de tudo isso, enquanto você vive o momento mais importante
+            da sua vida.
           </p>
-          <div className="mt-10 flex flex-wrap items-center gap-10 border-t border-ivory/10 pt-8">
-            <Metric value="+120" label="Casamentos realizados" />
-            <Metric value="100%" label="Cerimônias no horário" />
-            <Metric value="5★" label="Avaliação das noivas" />
+          <p className="mt-8 font-display text-xl italic text-gold">
+            Jessika — Fundadora J&amp;M
+          </p>
+          <div className="mt-10">
+            <a
+              href={WHATSAPP}
+              target="_blank"
+              rel="noreferrer"
+              className="group inline-flex items-center justify-center gap-2 bg-gold px-8 py-4 text-xs uppercase tracking-[0.28em] text-ink transition-all hover:bg-ivory"
+            >
+              Falar com a Jessika no WhatsApp <MessageCircle className="h-4 w-4" />
+            </a>
           </div>
         </motion.div>
       </div>
     </section>
   );
 }
+
 
 function Metric({ value, label }: { value: string; label: string }) {
   return (
