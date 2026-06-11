@@ -29,6 +29,11 @@ import g5 from "@/assets/g5.jpg";
 import g6 from "@/assets/g6.jpg";
 import g7 from "@/assets/g7.jpg";
 import g8 from "@/assets/g8.jpg";
+import depo1 from "@/assets/depo1.jpg.asset.json";
+import depo2 from "@/assets/depo2.jpg.asset.json";
+import depo3 from "@/assets/depo3.jpg.asset.json";
+import depo4 from "@/assets/depo4.jpg.asset.json";
+import depo5 from "@/assets/depo5.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -573,44 +578,14 @@ function Differentials() {
   );
 }
 
+
 function Testimonials() {
-  const chats = [
-    {
-      name: "Marina & Pedro",
-      pkg: "Essência Completa",
-      messages: [
-        "Meninas, eu não tenho palavras 🥹",
-        "Foi tudo MAIS do que perfeito.",
-        "Vocês cuidaram de coisas que eu nem sabia que existiam. Casei sem pensar em nada além de aproveitar.",
-      ],
-    },
-    {
-      name: "Beatriz",
-      pkg: "Essência Parcial",
-      messages: [
-        "Gente, o casamento foi um sonho ✨",
-        "Sem vocês eu teria surtado.",
-        "Cada fornecedor chegou no horário, tudo aconteceu como combinado. Obrigada por tanto carinho!",
-      ],
-    },
-    {
-      name: "Camila & Rafa",
-      pkg: "Essência do Dia",
-      messages: [
-        "Acabou e ainda tô em êxtase 💛",
-        "Vcs deixaram a gente literalmente curtir a festa.",
-        "Resolveram tudo nos bastidores e a gente nem percebeu. Indico de olhos fechados!!",
-      ],
-    },
-    {
-      name: "Júlia",
-      pkg: "Essência Completa",
-      messages: [
-        "Recebi minhas fotos e CHOREI 😭",
-        "Cada detalhe que combinamos estava lá.",
-        "Vocês são profissionais incríveis e ao mesmo tempo tão acolhedoras. Virei fã.",
-      ],
-    },
+  const prints = [
+    { src: depo1.url, name: "Gabriela" },
+    { src: depo2.url, name: "Gabriela" },
+    { src: depo3.url, name: "Elaine — Milena" },
+    { src: depo4.url, name: "Ana & Bruno" },
+    { src: depo5.url, name: "Carol & Leandro" },
   ];
   return (
     <section className="bg-background py-24 md:py-32">
@@ -621,51 +596,34 @@ function Testimonials() {
             O que as nossas <em className="text-gold">noivas dizem.</em>
           </h2>
           <p className="mt-6 text-base text-muted-foreground">
-            Mensagens reais, dias depois do sim.
+            Mensagens reais que recebemos no WhatsApp, dias depois do sim.
           </p>
         </motion.div>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {chats.map((c, i) => (
-            <motion.div
-              key={c.name}
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {prints.map((p, i) => (
+            <motion.figure
+              key={i}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.06 }}
-              className="flex flex-col border border-border bg-[#ece5dd] p-4 shadow-sm"
+              className="overflow-hidden border border-border bg-card shadow-sm ring-1 ring-inset ring-gold/10"
             >
-              <div className="mb-3 flex items-center gap-2 border-b border-black/5 pb-2">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-ink text-[0.7rem] font-medium text-ivory">
-                  {c.name[0]}
-                </div>
-                <div>
-                  <div className="text-xs font-medium text-ink">{c.name}</div>
-                  <div className="text-[0.65rem] text-ink/50">{c.pkg}</div>
-                </div>
-              </div>
-              <div className="flex flex-1 flex-col gap-2">
-                {c.messages.map((m, j) => (
-                  <div
-                    key={j}
-                    className="relative max-w-[90%] self-end rounded-lg rounded-tr-sm bg-[#dcf8c6] px-3 py-2 text-[0.8rem] leading-snug text-ink shadow-sm"
-                  >
-                    {m}
-                  </div>
-                ))}
-              </div>
-              <div className="mt-3 flex items-center gap-0.5 border-t border-black/5 pt-2 text-gold">
-                {[...Array(5)].map((_, k) => (
-                  <Star key={k} className="h-3 w-3 fill-gold" />
-                ))}
-              </div>
-            </motion.div>
+              <img
+                src={p.src}
+                alt={`Mensagem de ${p.name} para a J&M`}
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
+            </motion.figure>
           ))}
         </div>
       </div>
     </section>
   );
 }
+
 
 function FAQ() {
   const items = [
