@@ -596,6 +596,32 @@ function Testimonials() {
     { src: depo4.url, name: "Ana & Bruno" },
     { src: depo5.url, name: "Carol & Leandro" },
   ];
+
+  const autoplay = useRef(
+    Autoplay({
+      delay: 3500,
+      stopOnInteraction: true,
+      stopOnMouseEnter: true,
+      stopOnFocusIn: false,
+    })
+  );
+
+  const [api, setApi] = useState<CarouselApi>();
+  const [selected, setSelected] = useState(0);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!api) return;
+    setCount(api.scrollSnapList().length);
+    setSelected(api.selectedScrollSnap());
+    const onSelect = () => setSelected(api.selectedScrollSnap());
+    api.on("select", onSelect);
+    api.on("reInit", onSelect);
+    return () => {
+      api.off("select", onSelect);
+    };
+  }, [api]);
+
   return (
     <section className="bg-background py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
@@ -609,24 +635,43 @@ function Testimonials() {
           </p>
         </motion.div>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {prints.map((p, i) => (
-            <motion.figure
-              key={i}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.06 }}
-              className="overflow-hidden border border-border bg-card shadow-sm ring-1 ring-inset ring-gold/10"
-            >
-              <img
-                src={p.src}
-                alt={`Mensagem de ${p.name} para a J&M`}
-                loading="lazy"
-                className="h-full w-full object-cover"
+        <div className="mt-16 px-2 sm:px-10 lg:px-14">
+          <Carousel
+            opts={{ loop: true, align: "start" }}
+            plugins={[autoplay.current]}
+            setApi={setApi}
+            className="w-full"
+          >
+            <CarouselContent>
+              {prints.map((p, i) => (
+                <CarouselItem key={i} className="basis-full sm:basis-1/2 lg:basis-1/3">
+                  <figure className="flex h-[560px] items-center justify-center overflow-hidden border border-border bg-card p-3 shadow-sm ring-1 ring-inset ring-gold/10">
+                    <img
+                      src={p.src}
+                      alt={`Mensagem de ${p.name} para a J&M`}
+                      loading="lazy"
+                      className="h-full w-full object-contain"
+                    />
+                  </figure>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="hidden sm:flex" />
+            <CarouselNext className="hidden sm:flex" />
+          </Carousel>
+
+          <div className="mt-8 flex justify-center gap-2">
+            {Array.from({ length: count }).map((_, i) => (
+              <button
+                key={i}
+                aria-label={`Ir para depoimento ${i + 1}`}
+                onClick={() => api?.scrollTo(i)}
+                className={`h-1.5 rounded-full transition-all ${
+                  selected === i ? "w-8 bg-gold" : "w-2 bg-border hover:bg-gold/50"
+                }`}
               />
-            </motion.figure>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
