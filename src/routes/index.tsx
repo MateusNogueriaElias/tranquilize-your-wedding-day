@@ -600,9 +600,10 @@ function Testimonials() {
   const autoplay = useRef(
     Autoplay({
       delay: 3500,
-      stopOnInteraction: true,
+      stopOnInteraction: false,
       stopOnMouseEnter: true,
       stopOnFocusIn: false,
+      playOnInit: true,
     })
   );
 
