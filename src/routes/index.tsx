@@ -19,7 +19,8 @@ import {
 } from "lucide-react";
 
 import hero from "@/assets/hero.jpg";
-import solution from "@/assets/solution.jpg";
+import jessikaAsset from "@/assets/jessika.webp.asset.json";
+const jessika = jessikaAsset.url;
 import g1 from "@/assets/g1.jpg";
 import g2 from "@/assets/g2.jpg";
 import g3 from "@/assets/g3.jpg";
