@@ -10,7 +10,7 @@ import {
   Users,
   Clock,
   MessageCircle,
-  Instagram,
+  Camera as Instagram,
   MapPin,
   Plus,
   Minus,
