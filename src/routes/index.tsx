@@ -29,6 +29,11 @@ import g5 from "@/assets/g5.jpg";
 import g6 from "@/assets/g6.jpg";
 import g7 from "@/assets/g7.jpg";
 import g8 from "@/assets/g8.jpg";
+import depo1 from "@/assets/depo1.jpg.asset.json";
+import depo2 from "@/assets/depo2.jpg.asset.json";
+import depo3 from "@/assets/depo3.jpg.asset.json";
+import depo4 from "@/assets/depo4.jpg.asset.json";
+import depo5 from "@/assets/depo5.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
