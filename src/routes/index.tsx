@@ -43,6 +43,8 @@ import depo2 from "@/assets/depo2.jpg.asset.json";
 import depo3 from "@/assets/depo3.jpg.asset.json";
 import depo4 from "@/assets/depo4.jpg.asset.json";
 import depo5 from "@/assets/depo5.jpg.asset.json";
+import appMockupAsset from "@/assets/app-mockup.jpg.asset.json";
+const appMockup = appMockupAsset.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
