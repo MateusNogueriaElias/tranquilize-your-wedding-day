@@ -1,79 +1,34 @@
-## Objetivo
+Ajustar o menu da landing page para ficar fixo no topo e responsivo em tablet/celular.
 
-Redesenhar a seção `AppBonus` ("Bônus Exclusivo") com o layout e conteúdo solicitados pelo usuário.
+## O que será feito
 
-## Layout solicitado
+1. **Header fixo (sticky/fixed)**
+   - Trocar `absolute` por `fixed` no `<header>` do Nav
+   - Adicionar backdrop blur e transição de cor de fundo ao scrollar (de transparente para um tom escuro/opaco)
+   - Usar um listener de scroll (useState/useEffect) para ativar o fundo quando sair do hero
+   - Manter a z-index alta para não ser sobreposto
 
-```text
-+----------------------------------------------------------+
-|  [EYEBROW: BÔNUS EXCLUSIVO]                              |
-|                                                          |
-|  +------------------------+  +-------------------------+ |
-|  | Título                 |  |                         | |
-|  | "A J&M organiza.       |  |   [Mockup de celular    | |
-|  |  Vocês acompanham     |  |    com app de          | |
-|  |  tudo com             |  |    planejamento]        | |
-|  |  tranquilidade."     |  |                         | |
-|  |                        |  |                         | |
-|  | Texto curto            |  |                         | |
-|  |                        |  |                         | |
-|  | [Botão CTA]            |  |                         | |
-|  +------------------------+  +-------------------------+ |
-|                                                          |
-|  +-----------+ +-----------+ +-----------+ +-----------+ |
-|  | Ícone     | | Ícone     | | Ícone     | | Ícone     | |
-|  | Tarefas   | | Fornece-  | | Organiza- | | Tranqui-  | |
-|  | e prazos  | | dores     | | ção       | | lidade    | |
-|  +-----------+ +-----------+ +-----------+ +-----------+ |
-+----------------------------------------------------------+
-```
+2. **Menu hambúrguer para mobile e tablet**
+   - Esconder os links de navegação em telas menores que `md`
+   - Adicionar um botão de menu hambúrguer (ícone do lucide-react, ex: `Menu` e `X`) visível apenas em mobile/tablet (`md:hidden`)
+   - Ao clicar, abrir um painel/dropdown com os links empilhados
+   - O painel terá fundo escuro (`bg-ink/95 backdrop-blur`), links em texto ivory, e animação simples de fade/slide
+   - Fechar o menu automaticamente ao clicar em um link
 
-## Mudanças
+3. **Ajustes de layout**
+   - Ajustar o padding-top do Hero ou o posicionamento do conteúdo para não ficar escondido atrás do header fixo
+   - Manter o botão "Orçamento" visível no desktop; no mobile, ele pode aparecer dentro do menu ou ser removido dependendo do espaço
+   - Garantir que o logo J&M permaneça visível e alinhado em todos os breakpoints
 
-### 1. Imagem do mockup
-
-- Gerar imagem de celular com app de planejamento de casamento.
-- Converter para asset Lovable (`lovable-assets create`) e remover o arquivo JPG original.
-
-### 2. Redesenho da função `AppBonus` em `src/routes/index.tsx`
-
-**Coluna da esquerda:**
-- Eyebrow: "BÔNUS EXCLUSIVO" (estilo `.eyebow` existente)
-- Título: "A J&M organiza. Vocês acompanham tudo com tranquilidade."
-- Parágrafo curto com o texto sobre a plataforma de planejamento
-- Botão CTA para WhatsApp (mesmo estilo dos outros CTAs do site)
-
-**Coluna da direita:**
-- Imagem do mockup de celular, com sombra sutil e leve rotação para dar profundidade
-
-**4 cards abaixo (grid 2x2 no mobile, 4 colunas no desktop):**
-1. **Tarefas e prazos** — "Acompanhem cada etapa do planejamento."
-2. **Fornecedores** — "Centralizem contatos, decisões e alinhamentos."
-3. **Organização completa** — "Tudo em um só lugar, com mais clareza."
-4. **Tranquilidade para o casal** — "Menos preocupação e mais segurança até o grande dia."
-
-Cada card terá:
-- Ícone (do `lucide-react`, escolhido para fazer sentido com o texto)
-- Título em negrito
-- Descrição curta
-
-### 3. Animações
-
-- Animação de entrada `fadeUp` (já existente no projeto) para a seção toda e para os cards com stagger.
-
-### 4. Responsividade
-
-- Mobile: colunas empilham (texto em cima, imagem embaixo), cards em grid 2x2
-- Tablet/Desktop: duas colunas lado a lado, cards em grid 4 colunas
+4. **Responsividade garantida**
+   - `sm` e abaixo: apenas logo + hambúrguer
+   - `md` e acima: logo + links alinhados + botão Orçamento
+   - Transições suaves de cor e opacidade no header
 
 ## Arquivos alterados
+- `src/routes/index.tsx` — reescrever o componente `Nav`
 
-- `src/routes/index.tsx` — função `AppBonus` reescrita
-- `src/assets/app-mockup.jpg.asset.json` — novo asset pointer
-- `src/assets/app-mockup.jpg` — removido após upload
-
-## Sem mudanças em
-
-- Design tokens (cores, fontes)
-- Outras seções do site
-- Backend / lógica de dados
+## Não será alterado
+- Nenhuma outra seção da página
+- Nenhuma dependência nova (usa lucide-react já instalado)
+- Nenhum arquivo de estilo global
