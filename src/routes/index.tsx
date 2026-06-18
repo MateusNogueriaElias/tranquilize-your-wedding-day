@@ -46,6 +46,8 @@ import depo3 from "@/assets/depo3.jpg.asset.json";
 import depo4 from "@/assets/depo4.jpg.asset.json";
 import depo5 from "@/assets/depo5.jpg.asset.json";
 import appMockupAsset from "@/assets/app-mockup.jpg.asset.json";
+import { albums } from "@/data/albums";
+import { AlbumLightbox } from "@/components/AlbumLightbox";
 const appMockup = appMockupAsset.url;
 
 export const Route = createFileRoute("/")({
