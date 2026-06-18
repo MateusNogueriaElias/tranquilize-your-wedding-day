@@ -118,7 +118,9 @@ function Nav() {
   }, []);
 
   const links = [
+    { href: "#inicio", label: "Início" },
     { href: "#pacotes", label: "Pacotes" },
+    { href: "#depoimentos", label: "Depoimentos" },
     { href: "#galeria", label: "Galeria" },
     { href: "#processo", label: "Como funciona" },
     { href: "#faq", label: "FAQ" },
@@ -195,7 +197,7 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="relative min-h-[100vh] w-full overflow-hidden bg-ink">
+    <section id="inicio" className="relative min-h-[100vh] w-full overflow-hidden bg-ink">
       <img
         src={hero}
         alt="Noiva em momento sereno no pôr do sol"
@@ -798,7 +800,7 @@ function Testimonials() {
   }, [api]);
 
   return (
-    <section className="bg-background py-24 md:py-32">
+    <section id="depoimentos" className="bg-background py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-2xl">
           <span className="eyebrow">Depoimentos</span>
