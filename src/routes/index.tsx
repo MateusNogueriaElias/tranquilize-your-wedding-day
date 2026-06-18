@@ -43,6 +43,8 @@ import depo2 from "@/assets/depo2.jpg.asset.json";
 import depo3 from "@/assets/depo3.jpg.asset.json";
 import depo4 from "@/assets/depo4.jpg.asset.json";
 import depo5 from "@/assets/depo5.jpg.asset.json";
+import appMockupAsset from "@/assets/app-mockup.jpg.asset.json";
+const appMockup = appMockupAsset.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -458,36 +460,107 @@ function Packages() {
 }
 
 function AppBonus() {
+  const features = [
+    {
+      icon: ClipboardCheck,
+      title: "Tarefas e prazos",
+      desc: "Acompanhem cada etapa do planejamento.",
+    },
+    {
+      icon: Users,
+      title: "Fornecedores",
+      desc: "Centralizem contatos, decisões e alinhamentos.",
+    },
+    {
+      icon: Sparkles,
+      title: "Organização completa",
+      desc: "Tudo em um só lugar, com mais clareza.",
+    },
+    {
+      icon: ShieldCheck,
+      title: "Tranquilidade para o casal",
+      desc: "Menos preocupação e mais segurança até o grande dia.",
+    },
+  ];
+
   return (
-    <section className="bg-background py-16 md:py-24">
-      <div className="mx-auto max-w-4xl px-6 md:px-10">
+    <section className="bg-sand/20 py-20 md:py-28">
+      <div className="mx-auto max-w-6xl px-6 md:px-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="rounded-2xl border border-gold/30 bg-sand/30 p-8 text-center md:p-12"
+          className="text-center"
         >
-          <span className="eyebrow text-gold">Bônus Exclusivo</span>
-          <h3 className="mt-4 font-display text-2xl leading-tight md:text-4xl">
-            Um benefício exclusivo: <em className="text-gold">Aplicativo de Planejamento do Casamento</em>
-          </h3>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            Para tornar a experiência ainda mais completa, os noivos recebem acesso ao nosso aplicativo exclusivo de planejamento.
-          </p>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            Uma ferramenta criada para centralizar todas as informações do casamento em um único lugar, trazendo mais praticidade, organização e tranquilidade durante toda a jornada.
-          </p>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            Por meio do aplicativo, o casal consegue acompanhar tarefas, prazos, fornecedores, decisões importantes e todas as etapas do planejamento de forma simples e personalizada.
-          </p>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            Mais do que organizar informações, o aplicativo permite que vocês vivenciem cada fase do casamento com mais segurança, tendo a certeza de que nenhum detalhe ficará para trás.
-          </p>
-          <p className="mx-auto mt-6 max-w-2xl text-sm font-medium leading-relaxed text-foreground">
-            Tecnologia, estratégia e cuidado em cada etapa do sonho de vocês.
-          </p>
+          <span className="eyebrow">Bônus Exclusivo</span>
         </motion.div>
+
+        <div className="mt-12 grid items-center gap-12 md:grid-cols-2 md:gap-16">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+          >
+            <h2 className="font-display text-3xl leading-tight md:text-5xl">
+              A J&M organiza. <br />
+              <em className="text-gold">Vocês acompanham tudo</em> com tranquilidade.
+            </h2>
+            <p className="mt-6 text-base leading-relaxed text-muted-foreground">
+              Para deixar a experiência ainda mais completa, clientes J&M recebem acesso a uma plataforma de planejamento do casamento, onde as principais informações ficam centralizadas e fáceis de acompanhar.
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+              Com ela, vocês conseguem visualizar tarefas, prazos, fornecedores, decisões importantes e etapas do planejamento, tudo de forma prática e organizada.
+            </p>
+            <p className="mt-4 text-base italic leading-relaxed text-foreground">
+              Porque casamento bem planejado é casamento vivido com leveza.
+            </p>
+            <a
+              href={WHATSAPP}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-8 inline-flex items-center justify-center bg-ink px-8 py-4 text-xs uppercase tracking-[0.28em] text-ivory transition-colors hover:bg-gold hover:text-ink"
+            >
+              Quero esse bônus
+            </a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="relative flex justify-center"
+          >
+            <div className="absolute inset-0 -z-10 mx-auto h-full w-3/4 rounded-full bg-gold/20 blur-3xl" />
+            <img
+              src={appMockup}
+              alt="Aplicativo de planejamento de casamento J&M"
+              loading="lazy"
+              width={1024}
+              height={1024}
+              className="w-full max-w-sm rotate-[3deg] drop-shadow-[0_30px_60px_rgba(0,0,0,0.25)] transition-transform duration-500 hover:rotate-0"
+            />
+          </motion.div>
+        </div>
+
+        <div className="mt-16 grid grid-cols-2 gap-4 md:mt-20 md:grid-cols-4 md:gap-6">
+          {features.map((f, i) => (
+            <motion.div
+              key={f.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="group flex flex-col gap-3 border border-border bg-background p-6 transition-colors hover:border-gold"
+            >
+              <f.icon className="h-6 w-6 text-gold" strokeWidth={1.5} />
+              <h3 className="font-display text-lg leading-snug">{f.title}</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

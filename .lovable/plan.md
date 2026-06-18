@@ -1,24 +1,79 @@
-## Carrossel de depoimentos com autoplay
+## Objetivo
 
-Vou transformar a grade atual de prints num **carrossel** que passa sozinho e funciona igual em mobile, tablet e desktop.
+Redesenhar a seção `AppBonus` ("Bônus Exclusivo") com o layout e conteúdo solicitados pelo usuário.
 
-### Mudanças em `src/routes/index.tsx` — função `Testimonials`
+## Layout solicitado
 
-1. **Trocar a grid por um carrossel Embla** usando o componente `Carousel` já existente em `src/components/ui/carousel.tsx`, com o plugin `embla-carousel-autoplay` (já vem com o Embla, sem nova dependência pesada — instalar `embla-carousel-autoplay` via `bun add`).
-2. **Slides responsivos**: 1 por vez no mobile, 2 no tablet (`sm`), 3 no desktop (`lg`) — `basis-full sm:basis-1/2 lg:basis-1/3`.
-3. **Prints sem corte**: trocar `object-cover` por `object-contain` com altura fixa (`h-[520px]`) e fundo neutro para a imagem caber inteira independente da proporção.
-4. **Autoplay**: passa a cada ~3.5s, em loop infinito.
-5. **Pausar ao interagir**:
-   - hover do mouse → `stopOnMouseEnter: true`
-   - clique/toque → `stopOnInteraction: true` (mesmo comportamento no mobile/tablet via touch)
-   - retoma sozinho ao sair (`stopOnFocusIn: false`)
-6. **Setas** (`CarouselPrevious` / `CarouselNext`) no desktop e **dots** discretos embaixo para feedback de progresso em qualquer tela.
-7. Manter título, eyebrow, animação de entrada da seção.
+```text
++----------------------------------------------------------+
+|  [EYEBROW: BÔNUS EXCLUSIVO]                              |
+|                                                          |
+|  +------------------------+  +-------------------------+ |
+|  | Título                 |  |                         | |
+|  | "A J&M organiza.       |  |   [Mockup de celular    | |
+|  |  Vocês acompanham     |  |    com app de          | |
+|  |  tudo com             |  |    planejamento]        | |
+|  |  tranquilidade."     |  |                         | |
+|  |                        |  |                         | |
+|  | Texto curto            |  |                         | |
+|  |                        |  |                         | |
+|  | [Botão CTA]            |  |                         | |
+|  +------------------------+  +-------------------------+ |
+|                                                          |
+|  +-----------+ +-----------+ +-----------+ +-----------+ |
+|  | Ícone     | | Ícone     | | Ícone     | | Ícone     | |
+|  | Tarefas   | | Fornece-  | | Organiza- | | Tranqui-  | |
+|  | e prazos  | | dores     | | ção       | | lidade    | |
+|  +-----------+ +-----------+ +-----------+ +-----------+ |
++----------------------------------------------------------+
+```
 
-### Dependência
-- `bun add embla-carousel-autoplay`
+## Mudanças
 
-### Arquivos
-- editar `src/routes/index.tsx` (apenas a função `Testimonials` + import do plugin)
+### 1. Imagem do mockup
 
-Sem alterações de backend, design tokens ou outras seções.
+- Gerar imagem de celular com app de planejamento de casamento.
+- Converter para asset Lovable (`lovable-assets create`) e remover o arquivo JPG original.
+
+### 2. Redesenho da função `AppBonus` em `src/routes/index.tsx`
+
+**Coluna da esquerda:**
+- Eyebrow: "BÔNUS EXCLUSIVO" (estilo `.eyebow` existente)
+- Título: "A J&M organiza. Vocês acompanham tudo com tranquilidade."
+- Parágrafo curto com o texto sobre a plataforma de planejamento
+- Botão CTA para WhatsApp (mesmo estilo dos outros CTAs do site)
+
+**Coluna da direita:**
+- Imagem do mockup de celular, com sombra sutil e leve rotação para dar profundidade
+
+**4 cards abaixo (grid 2x2 no mobile, 4 colunas no desktop):**
+1. **Tarefas e prazos** — "Acompanhem cada etapa do planejamento."
+2. **Fornecedores** — "Centralizem contatos, decisões e alinhamentos."
+3. **Organização completa** — "Tudo em um só lugar, com mais clareza."
+4. **Tranquilidade para o casal** — "Menos preocupação e mais segurança até o grande dia."
+
+Cada card terá:
+- Ícone (do `lucide-react`, escolhido para fazer sentido com o texto)
+- Título em negrito
+- Descrição curta
+
+### 3. Animações
+
+- Animação de entrada `fadeUp` (já existente no projeto) para a seção toda e para os cards com stagger.
+
+### 4. Responsividade
+
+- Mobile: colunas empilham (texto em cima, imagem embaixo), cards em grid 2x2
+- Tablet/Desktop: duas colunas lado a lado, cards em grid 4 colunas
+
+## Arquivos alterados
+
+- `src/routes/index.tsx` — função `AppBonus` reescrita
+- `src/assets/app-mockup.jpg.asset.json` — novo asset pointer
+- `src/assets/app-mockup.jpg` — removido após upload
+
+## Sem mudanças em
+
+- Design tokens (cores, fontes)
+- Outras seções do site
+- Backend / lógica de dados
