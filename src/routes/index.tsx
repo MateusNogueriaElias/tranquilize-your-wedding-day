@@ -89,6 +89,7 @@ function Landing() {
       <Solution />
       <Benefits />
       <Packages />
+      <AppBonus />
       <Gallery />
       <Process />
       <Differentials />
@@ -337,7 +338,7 @@ function Packages() {
         "Supervisão de todos os fornecedores",
         "Gestão minuciosa do cronograma",
         "Resolução discreta de imprevistos",
-        "Reunião de alinhamento pré-evento",
+        "2 reuniões de alinhamento pré-evento",
         "Kit emergência da noiva",
       ],
       ideal: "Casais que já contrataram fornecedores e querem profissionais garantindo cada minuto.",
@@ -367,9 +368,10 @@ function Packages() {
       includes: [
         "Planejamento integral do casamento",
         "Curadoria e gestão de todos os fornecedores",
-        "Controle financeiro e contratos",
+        "Controle financeiro inteligente",
+        "Análise estratégica de contratos",
         "Cronograma detalhado em todas as fases",
-        "Reuniões ilimitadas com a noiva",
+        "Reuniões ilimitadas com os noivos",
         "Apoio emocional dedicado",
         "Coordenação total no dia + pós-evento",
       ],
