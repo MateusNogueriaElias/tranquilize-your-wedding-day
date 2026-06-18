@@ -25,6 +25,8 @@ import {
   Minus,
   Check,
   Star,
+  Menu,
+  X,
 } from "lucide-react";
 
 import hero from "@/assets/hero.jpg";
