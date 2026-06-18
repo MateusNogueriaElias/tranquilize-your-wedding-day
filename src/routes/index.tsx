@@ -105,17 +105,41 @@ function Landing() {
 }
 
 function Nav() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const links = [
+    { href: "#pacotes", label: "Pacotes" },
+    { href: "#galeria", label: "Galeria" },
+    { href: "#processo", label: "Como funciona" },
+    { href: "#faq", label: "FAQ" },
+  ];
+
   return (
-    <header className="absolute top-0 left-0 right-0 z-30">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-10">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled || open
+          ? "bg-ink/90 backdrop-blur-md border-b border-ivory/10"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-10 md:py-6">
         <a href="#" className="font-display text-2xl tracking-wide text-ivory">
           J<span className="text-gold">&amp;</span>M
         </a>
         <nav className="hidden items-center gap-8 text-xs uppercase tracking-[0.25em] text-ivory/80 md:flex">
-          <a href="#pacotes" className="hover:text-gold transition-colors">Pacotes</a>
-          <a href="#galeria" className="hover:text-gold transition-colors">Galeria</a>
-          <a href="#processo" className="hover:text-gold transition-colors">Como funciona</a>
-          <a href="#faq" className="hover:text-gold transition-colors">FAQ</a>
+          {links.map((l) => (
+            <a key={l.href} href={l.href} className="hover:text-gold transition-colors">
+              {l.label}
+            </a>
+          ))}
         </nav>
         <a
           href={WHATSAPP}
@@ -125,6 +149,43 @@ function Nav() {
         >
           Orçamento
         </a>
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-label={open ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={open}
+          className="inline-flex items-center justify-center p-2 text-ivory md:hidden"
+        >
+          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
+      </div>
+
+      <div
+        className={`overflow-hidden border-t border-ivory/10 bg-ink/95 backdrop-blur-md transition-[max-height,opacity] duration-300 md:hidden ${
+          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <nav className="mx-auto flex max-w-7xl flex-col px-6 py-4">
+          {links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className="border-b border-ivory/5 py-3 text-xs uppercase tracking-[0.25em] text-ivory/80 transition-colors hover:text-gold"
+            >
+              {l.label}
+            </a>
+          ))}
+          <a
+            href={WHATSAPP}
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => setOpen(false)}
+            className="mt-4 border border-gold/60 px-5 py-3 text-center text-xs uppercase tracking-[0.25em] text-ivory transition-colors hover:bg-gold hover:text-ink"
+          >
+            Orçamento
+          </a>
+        </nav>
       </div>
     </header>
   );
