@@ -46,6 +46,8 @@ import depo3 from "@/assets/depo3.jpg.asset.json";
 import depo4 from "@/assets/depo4.jpg.asset.json";
 import depo5 from "@/assets/depo5.jpg.asset.json";
 import appMockupAsset from "@/assets/app-mockup.jpg.asset.json";
+import { albums } from "@/data/albums";
+import { AlbumLightbox } from "@/components/AlbumLightbox";
 const appMockup = appMockupAsset.url;
 
 export const Route = createFileRoute("/")({
@@ -632,55 +634,69 @@ function AppBonus() {
 }
 
 function Gallery() {
-  const photos = [
-    { src: g1, alt: "Cerimônia elegante com velas", caption: "Cada minuto, planejado." },
-    { src: g4, alt: "Buquê da noiva", caption: "Detalhes que emocionam." },
-    { src: g3, alt: "Noivos felizes", caption: "Noivos presentes." },
-    { src: g2, alt: "Mesa de jantar elegante", caption: null },
-    { src: g6, alt: "Bastidores da noiva", caption: "Bastidores no controle." },
-    { src: g5, alt: "Salão de recepção", caption: null },
-    { src: g7, alt: "Alianças sobre bandeja", caption: null },
-    { src: g8, alt: "Primeira dança", caption: "Para sempre começa aqui." },
-  ];
+  const [activeSlug, setActiveSlug] = useState<string | null>(null);
+  const activeAlbum = albums.find((a) => a.slug === activeSlug) ?? null;
+
   return (
     <section id="galeria" className="bg-background py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-2xl">
           <span className="eyebrow">Galeria</span>
           <h2 className="mt-4 font-display text-4xl leading-tight md:text-6xl">
-            Casamentos que <em className="text-gold">respiraram leveza.</em>
+            Eventos que <em className="text-gold">respiraram leveza.</em>
           </h2>
           <p className="mt-6 text-base text-muted-foreground">
-            Cada foto é uma noiva que viveu o próprio dia — sem carregar o peso
-            dos bastidores.
+            Cada celebração carrega uma história, um cuidado e uma experiência
+            pensada para ser vivida com tranquilidade.
           </p>
         </motion.div>
 
-        <div className="mt-16 columns-1 gap-4 sm:columns-2 lg:columns-3 [&>*]:mb-4">
-          {photos.map((p, i) => (
-            <motion.figure
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: (i % 3) * 0.08 }}
-              className="group relative break-inside-avoid overflow-hidden"
-            >
-              <img
-                src={p.src}
-                alt={p.alt}
-                loading="lazy"
-                className="w-full transition-transform duration-700 group-hover:scale-105"
-              />
-              {p.caption && (
-                <figcaption className="pointer-events-none absolute inset-0 flex items-end bg-gradient-to-t from-ink/80 via-transparent to-transparent p-6 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                  <span className="font-display text-xl italic text-ivory">{p.caption}</span>
-                </figcaption>
-              )}
-            </motion.figure>
-          ))}
+        <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {albums.map((album, i) => {
+            const isSpecial = album.category === "Evento especial";
+            return (
+              <motion.button
+                key={album.slug}
+                type="button"
+                onClick={() => setActiveSlug(album.slug)}
+                aria-label={`Abrir álbum ${album.title}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: (i % 3) * 0.08 }}
+                className={`group relative block overflow-hidden text-left ${
+                  isSpecial ? "ring-1 ring-gold/60" : ""
+                }`}
+              >
+                <div className="aspect-[4/5] w-full overflow-hidden bg-muted">
+                  <img
+                    src={album.cover}
+                    alt={album.coverAlt}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+                  />
+                </div>
+
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/20 to-transparent opacity-90 transition-opacity duration-500" />
+
+                <div className="absolute inset-x-0 bottom-0 flex flex-col gap-1 p-6">
+                  <span className="eyebrow text-gold">{album.category}</span>
+                  <h3 className="font-display text-2xl text-ivory md:text-3xl">
+                    {album.title}
+                  </h3>
+                  <span className="mt-2 inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-ivory/0 transition-all duration-500 group-hover:text-ivory/90">
+                    Ver álbum
+                    <span aria-hidden className="h-px w-6 bg-gold" />
+                  </span>
+                </div>
+              </motion.button>
+            );
+          })}
         </div>
       </div>
+
+      <AlbumLightbox album={activeAlbum} onClose={() => setActiveSlug(null)} />
     </section>
   );
 }
