@@ -457,6 +457,42 @@ function Packages() {
   );
 }
 
+function AppBonus() {
+  return (
+    <section className="bg-background py-16 md:py-24">
+      <div className="mx-auto max-w-4xl px-6 md:px-10">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          className="rounded-2xl border border-gold/30 bg-sand/30 p-8 text-center md:p-12"
+        >
+          <span className="eyebrow text-gold">Bônus Exclusivo</span>
+          <h3 className="mt-4 font-display text-2xl leading-tight md:text-4xl">
+            Um benefício exclusivo: <em className="text-gold">Aplicativo de Planejamento do Casamento</em>
+          </h3>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Para tornar a experiência ainda mais completa, os noivos recebem acesso ao nosso aplicativo exclusivo de planejamento.
+          </p>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Uma ferramenta criada para centralizar todas as informações do casamento em um único lugar, trazendo mais praticidade, organização e tranquilidade durante toda a jornada.
+          </p>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Por meio do aplicativo, o casal consegue acompanhar tarefas, prazos, fornecedores, decisões importantes e todas as etapas do planejamento de forma simples e personalizada.
+          </p>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Mais do que organizar informações, o aplicativo permite que vocês vivenciem cada fase do casamento com mais segurança, tendo a certeza de que nenhum detalhe ficará para trás.
+          </p>
+          <p className="mx-auto mt-6 max-w-2xl text-sm font-medium leading-relaxed text-foreground">
+            Tecnologia, estratégia e cuidado em cada etapa do sonho de vocês.
+          </p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 function Gallery() {
   const photos = [
     { src: g1, alt: "Cerimônia elegante com velas", caption: "Cada minuto, planejado." },
