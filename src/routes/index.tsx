@@ -50,27 +50,66 @@ import { albums } from "@/data/albums";
 import { AlbumLightbox } from "@/components/AlbumLightbox";
 const appMockup = appMockupAsset.url;
 
+const SITE_URL = "https://tranquilize-your-wedding-day.lovable.app";
+
+const FAQ_ITEMS = [
+  { q: "Com quanto tempo de antecedência devo contratar?", a: "O ideal é entre 8 e 12 meses para a Essência Completa e a partir de 60 dias para a Essência do Dia. Mas se faltam poucos meses, fale com a gente — costumamos encontrar um caminho." },
+  { q: "Vocês trabalham apenas no dia do casamento?", a: "Não. Temos três pacotes: do acompanhamento integral à coordenação focada no dia. Escolhemos juntas o formato ideal para o seu momento." },
+  { q: "Posso contratar se já tiver alguns fornecedores?", a: "Sim. Fazemos um diagnóstico do que já foi contratado, alinhamos com cada parceiro e seguimos com o planejamento a partir dali — sem retrabalho." },
+  { q: "A assessoria ajuda na escolha de fornecedores?", a: "Ajuda. Temos uma rede curada de profissionais já testados em casamentos reais e cuidamos da negociação, contratos e alinhamento criativo." },
+  { q: "Vocês cuidam do cronograma do evento?", a: "Sim — e esse é um dos cuidados que mais transformam o seu dia. Cada minuto é planejado e compartilhado com fornecedores, família e equipe técnica." },
+  { q: "Como faço para saber qual pacote é ideal para mim?", a: "Fale com a gente pelo WhatsApp. Conversamos sobre o seu casamento e indicamos com transparência o pacote que faz mais sentido — sem pressão de venda." },
+];
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "J&M Assessoria de Casamentos | Tranquilidade no seu grande dia" },
       { name: "description", content: "Assessoria completa de casamentos. Cuidamos dos bastidores para você viver o seu grande dia com leveza. Peça seu orçamento pelo WhatsApp." },
-      { property: "og:title", content: "J&M Assessoria de Casamentos" },
-      { property: "og:description", content: "Cuidamos dos bastidores para você viver o seu dia." },
-      { property: "og:image", content: hero },
-      { property: "og:url", content: "/" },
+      { property: "og:title", content: "J&M Assessoria de Casamentos | Tranquilidade no seu grande dia" },
+      { property: "og:description", content: "Assessoria completa de casamentos. Cuidamos dos bastidores para você viver o seu grande dia com leveza." },
+      { property: "og:image", content: `${SITE_URL}${hero}` },
+      { property: "og:url", content: SITE_URL + "/" },
+      { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "J&M Assessoria de Casamentos" },
+      { property: "og:locale", content: "pt_BR" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "J&M Assessoria de Casamentos" },
+      { name: "twitter:description", content: "Cuidamos dos bastidores para você viver o seu grande dia com leveza." },
+      { name: "twitter:image", content: `${SITE_URL}${hero}` },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [
+      { rel: "canonical", href: SITE_URL + "/" },
+      { rel: "preload", as: "image", href: hero, fetchpriority: "high" } as never,
+    ],
     scripts: [
       {
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
+          "@id": SITE_URL + "/#business",
           name: "J&M Assessoria de Casamentos",
-          description: "Assessoria completa de casamentos e eventos.",
+          description: "Assessoria completa de casamentos e eventos. Cuidamos dos bastidores para você viver o seu grande dia com leveza.",
+          url: SITE_URL,
+          image: `${SITE_URL}${hero}`,
           telephone: "+5511992772641",
-          areaServed: "BR",
+          priceRange: "$$",
+          areaServed: { "@type": "Country", name: "Brasil" },
+          serviceType: ["Assessoria de Casamento", "Cerimonialista", "Wedding Planner", "Coordenação de Eventos"],
+          sameAs: ["https://www.instagram.com/jem.assessoria"],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQ_ITEMS.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
         }),
       },
     ],
@@ -205,6 +244,8 @@ function Hero() {
         alt="Noiva em momento sereno no pôr do sol"
         width={1600}
         height={1200}
+        fetchPriority="high"
+        decoding="async"
         className="absolute inset-0 h-full w-full object-cover opacity-70"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/40 to-ink" />
