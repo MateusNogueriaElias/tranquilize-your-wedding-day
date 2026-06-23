@@ -30,6 +30,17 @@ export function AlbumLightbox({ album, onClose }: Props) {
     };
   }, [album, onClose]);
 
+  // Preload neighbor photos so navigation feels instant
+  useEffect(() => {
+    if (!album) return;
+    const nextIdx = (index + 1) % album.photos.length;
+    const prevIdx = (index - 1 + album.photos.length) % album.photos.length;
+    [nextIdx, prevIdx].forEach((i) => {
+      const img = new Image();
+      img.src = album.photos[i].src;
+    });
+  }, [album, index]);
+
   if (!album) return null;
 
   const photo = album.photos[index];
