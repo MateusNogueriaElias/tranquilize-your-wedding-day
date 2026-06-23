@@ -1,89 +1,49 @@
-# Nova seção Galeria — álbuns clicáveis
+# Como enviar as fotos por álbum
 
-Vou reformular a seção `#galeria` em `src/routes/index.tsx` para virar uma galeria de **álbuns**, cada um abrindo um lightbox com várias fotos.
+Boa notícia: **não precisamos criar pastas físicas no código**. As fotos são enviadas para o CDN da Lovable (mais rápido, sem inchar o repositório) e cada uma vira um arquivo pequeno `.asset.json` que aponta para a imagem.
 
-## Conteúdo
+Mas vamos sim **organizar logicamente por álbum** dentro de `src/assets/albums/<slug-do-album>/` — assim fica fácil saber quais fotos pertencem a cada evento.
 
-**Cabeçalho**
-- Eyebrow: "Galeria"
-- Título: *Eventos que respiraram leveza.*
-- Subtítulo: *Cada celebração carrega uma história, um cuidado e uma experiência pensada para ser vivida com tranquilidade.*
+## Estrutura que vou criar
 
-**Álbuns (cards de capa)**
-
-Casamentos:
-1. Andreia & Lucas
-2. Angela & Vinicius
-3. Gabriela & Nicholas
-4. Gabriela & Pedro
-5. Nadine & Flavio
-6. Yasmin & Gustavo
-
-Evento especial (destaque sutil — badge dourado "Evento especial"):
-7. Milena — 15 anos
-
-## Layout dos cards
-
-- Grid responsivo: 1 col (mobile) · 2 cols (tablet) · 3 cols (desktop)
-- Cada card:
-  - Capa grande (proporção 4/5, `object-cover`, `loading="lazy"`, WebP)
-  - Categoria pequena (eyebrow dourado) acima do nome
-  - Nome do evento em fonte display
-  - Overlay escuro suave no hover com texto "Ver álbum →"
-  - Zoom discreto da imagem no hover, transição elegante
-  - Card 7 (Milena) com borda/badge dourado discreto para diferenciar
-
-## Comportamento — Lightbox
-
-Ao clicar num card, abre um **modal** (Dialog do shadcn já instalado) com:
-- Header: nome do evento + categoria
-- Foto principal grande com setas ‹ › de navegação
-- Tira de miniaturas clicáveis abaixo
-- Suporte a teclado (← → Esc)
-- Swipe no mobile
-- Botão fechar (X) visível no canto
-- CTA no rodapé: **"Quero uma celebração assim"** → rola para `#contato` (ou WhatsApp, o que vocês preferirem depois)
-- Layout responsivo, fundo `bg-ink/90 backdrop-blur`
-
-## Estrutura de dados
-
-```ts
-type Album = {
-  slug: string;
-  title: string;
-  category: "Casamento" | "Evento especial";
-  cover: string;        // url WebP
-  coverAlt: string;
-  photos: { src: string; alt: string }[];
-};
-const albums: Album[] = [ /* 7 álbuns */ ];
+```
+src/assets/albums/
+├── andreia-lucas/        → fotos de Andreia & Lucas
+├── angela-vinicius/      → fotos de Angela & Vinicius
+├── gabriela-nicholas/    → fotos de Gabriela & Nicholas
+├── gabriela-pedro/       → fotos de Gabriela & Pedro
+├── nadine-flavio/        → fotos de Nadine & Flavio
+├── yasmin-gustavo/       → fotos de Yasmin & Gustavo
+└── milena-15-anos/       → fotos do 15 anos da Milena
 ```
 
-Tudo num arquivo separado `src/data/albums.ts` para facilitar a manutenção quando as fotos chegarem.
+## Como você manda as fotos
 
-## Imagens (aguardando upload)
+A maneira mais simples: **mande aqui no chat, álbum por álbum**, em mensagens separadas, mais ou menos assim:
 
-- Aceito as fotos quando você enviar (WebP de preferência, ou converto)
-- Subo todas via Lovable Assets (CDN, lazy loading nativo)
-- Por enquanto deixo placeholders neutros para você ver a estrutura funcionando
-- Cada foto recebe `alt` descritivo (ex: "Andreia e Lucas — cerimônia ao ar livre") para SEO
+> "Essas são da **Andreia & Lucas**" + arrasta/anexa as fotos da Andreia
+> (próxima mensagem) "Essas são da **Angela & Vinicius**" + anexa…
 
-## Acessibilidade & técnico
+Pode mandar várias fotos por mensagem (limite de 10 por mensagem, até 20MB cada). Se um álbum tiver mais de 10 fotos, manda em duas mensagens dizendo "continuação do álbum X".
 
-- Dialog acessível (Radix): foco preso, Esc fecha, `aria-label` no botão de cada card
-- `loading="lazy"` + `decoding="async"` em todas as imagens
-- Alt text individual por foto
-- Sem mudanças de backend, sem novas dependências (Dialog e lucide-react já estão no projeto)
+A cada mensagem eu:
+1. Subo as fotos para o CDN dentro de `src/assets/albums/<album>/`
+2. Atualizo o `src/data/albums.ts` para usar as fotos reais (capa + galeria) no lugar dos placeholders
+3. Defino um `alt` descritivo para cada foto (SEO + acessibilidade)
 
-## Arquivos
+## Dicas para as fotos
 
-- `src/routes/index.tsx` — substituir o bloco atual da seção `#galeria`
-- `src/data/albums.ts` (novo) — lista de álbuns e fotos
-- `src/components/AlbumLightbox.tsx` (novo) — componente do modal com navegação
+- **Formato**: JPG ou WEBP, ambos funcionam (WEBP é mais leve, mas eu otimizo no CDN de qualquer jeito)
+- **Capa**: indique qual foto é a capa do álbum (ou eu escolho a mais forte). Capas funcionam melhor em formato **retrato (vertical)** — o layout é 4:5
+- **Quantidade**: 6 a 12 fotos por álbum é o ideal para o lightbox; mais que isso fica cansativo
+- **Ordem**: se quiser uma ordem específica (ex: cerimônia → festa → bastidores), numere os arquivos (01_, 02_…) ou me diga na mensagem
 
-## Não vou mexer
+## O que NÃO muda
 
-- Menu, hero, pacotes, depoimentos, bônus, contato — nada disso muda
-- Tokens de design e fontes permanecem iguais
+- A estrutura do componente `Gallery` e o `AlbumLightbox` continuam iguais
+- Só troco os imports de placeholder (`g1`–`g8`) pelas fotos reais no `src/data/albums.ts`
+- Nenhuma outra seção do site é alterada
 
-Quando aprovar, eu implemento a estrutura com placeholders. Assim que você mandar as fotos, faço o upload e troco as capas + galerias.
+---
+
+**Pode começar a mandar quando aprovar este plano.** Sugestão: comece por **um álbum** só, pra você ver o resultado, e depois manda o resto.
