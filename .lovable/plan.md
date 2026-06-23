@@ -1,49 +1,43 @@
 # Como enviar as fotos por álbum
 
-Boa notícia: **não precisamos criar pastas físicas no código**. As fotos são enviadas para o CDN da Lovable (mais rápido, sem inchar o repositório) e cada uma vira um arquivo pequeno `.asset.json` que aponta para a imagem.
+Não precisamos criar pastas físicas no código — as fotos vão para o CDN da Lovable (mais rápido, sem pesar o repositório). Cada foto vira um arquivo `.asset.json` pequeno, organizado logicamente por álbum em `src/assets/albums/<slug>/`.
 
-Mas vamos sim **organizar logicamente por álbum** dentro de `src/assets/albums/<slug-do-album>/` — assim fica fácil saber quais fotos pertencem a cada evento.
-
-## Estrutura que vou criar
+## Estrutura lógica (criada automaticamente conforme os uploads)
 
 ```
 src/assets/albums/
-├── andreia-lucas/        → fotos de Andreia & Lucas
-├── angela-vinicius/      → fotos de Angela & Vinicius
-├── gabriela-nicholas/    → fotos de Gabriela & Nicholas
-├── gabriela-pedro/       → fotos de Gabriela & Pedro
-├── nadine-flavio/        → fotos de Nadine & Flavio
-├── yasmin-gustavo/       → fotos de Yasmin & Gustavo
-└── milena-15-anos/       → fotos do 15 anos da Milena
+├── andreia-lucas/
+├── angela-vinicius/
+├── gabriela-nicholas/
+├── gabriela-pedro/
+├── nadine-flavio/
+├── yasmin-gustavo/
+└── milena-15-anos/
 ```
 
-## Como você manda as fotos
+## Como mandar as fotos
 
-A maneira mais simples: **mande aqui no chat, álbum por álbum**, em mensagens separadas, mais ou menos assim:
+**Anexa as fotos aqui no chat**, uma mensagem por álbum, dizendo de qual evento são. Exemplo:
 
-> "Essas são da **Andreia & Lucas**" + arrasta/anexa as fotos da Andreia
-> (próxima mensagem) "Essas são da **Angela & Vinicius**" + anexa…
-
-Pode mandar várias fotos por mensagem (limite de 10 por mensagem, até 20MB cada). Se um álbum tiver mais de 10 fotos, manda em duas mensagens dizendo "continuação do álbum X".
+> "Fotos da **Andreia & Lucas**" + arrasta as fotos
 
 A cada mensagem eu:
-1. Subo as fotos para o CDN dentro de `src/assets/albums/<album>/`
-2. Atualizo o `src/data/albums.ts` para usar as fotos reais (capa + galeria) no lugar dos placeholders
-3. Defino um `alt` descritivo para cada foto (SEO + acessibilidade)
+1. Subo as fotos para o CDN dentro de `src/assets/albums/<slug>/`
+2. Atualizo `src/data/albums.ts` trocando os placeholders pelas fotos reais
+3. Coloco `alt` descritivo em cada foto (SEO + acessibilidade)
 
-## Dicas para as fotos
+## Limites e dicas
 
-- **Formato**: JPG ou WEBP, ambos funcionam (WEBP é mais leve, mas eu otimizo no CDN de qualquer jeito)
-- **Capa**: indique qual foto é a capa do álbum (ou eu escolho a mais forte). Capas funcionam melhor em formato **retrato (vertical)** — o layout é 4:5
-- **Quantidade**: 6 a 12 fotos por álbum é o ideal para o lightbox; mais que isso fica cansativo
-- **Ordem**: se quiser uma ordem específica (ex: cerimônia → festa → bastidores), numere os arquivos (01_, 02_…) ou me diga na mensagem
+- **Limite do chat**: 10 fotos por mensagem, 20MB cada. Se um álbum tiver mais de 10, manda em mensagens seguidas dizendo "continuação do álbum X".
+- **Formato**: JPG ou WEBP, qualquer um funciona.
+- **Capa**: indique qual é a capa, ou eu escolho a mais forte. Capas em **retrato (vertical)** ficam melhor — o layout é 4:5.
+- **Quantidade ideal**: 6 a 12 fotos por álbum.
+- **Ordem**: numere os arquivos (01_, 02_…) se quiser ordem específica.
 
-## O que NÃO muda
+## O que não muda
 
-- A estrutura do componente `Gallery` e o `AlbumLightbox` continuam iguais
-- Só troco os imports de placeholder (`g1`–`g8`) pelas fotos reais no `src/data/albums.ts`
-- Nenhuma outra seção do site é alterada
+Componente `Gallery`, `AlbumLightbox`, design tokens, demais seções — tudo continua igual. Só os imports de placeholder no `src/data/albums.ts` são substituídos.
 
 ---
 
-**Pode começar a mandar quando aprovar este plano.** Sugestão: comece por **um álbum** só, pra você ver o resultado, e depois manda o resto.
+**Sugestão**: comece mandando **um álbum** só (ex: Andreia & Lucas) pra você ver como fica, depois manda o resto.
