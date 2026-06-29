@@ -1,3 +1,4 @@
+import { createFileRoute } from '@tanstack/react-router'
 import WhatsAppFloatingButton from "@/components/WhatsAppFloatingButton";
 import { useRef, useState, useEffect } from "react";
 import { motion } from "motion/react";
