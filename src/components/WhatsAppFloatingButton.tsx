@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import whatsappIcon from "@/assets/icons8-whatsapp.gif.asset.json";
 
 const WhatsAppFloatingButton = () => {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
