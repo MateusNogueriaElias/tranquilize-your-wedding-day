@@ -46,12 +46,12 @@ const WhatsAppFloatingButton = () => {
 
   if (isMinimized) {
     return (
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed bottom-4 right-4 z-50 sm:bottom-6 sm:right-6">
         <button
           onClick={() => setIsMinimized(false)}
-          className="w-10 h-10 bg-gray-600 hover:bg-gray-700 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center"
+          className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-600 hover:bg-gray-700 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center"
         >
-          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
           </svg>
         </button>
