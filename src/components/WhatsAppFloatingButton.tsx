@@ -64,22 +64,28 @@ const WhatsAppFloatingButton = () => {
       <div className="relative">
         {/* Tooltip */}
         <div
-          className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-3 sm:top-1/2 sm:left-auto sm:right-16 sm:bottom-auto sm:mb-0 sm:-translate-y-1/2 sm:translate-x-0 bg-white text-gray-800 rounded-xl shadow-xl px-4 py-3 transition-all duration-500 whitespace-nowrap border border-gray-100 ${
-            (isTooltipVisible || autoShowTooltip)
-              ? "opacity-100 transform translate-x-0 scale-100"
-              : "opacity-0 transform translate-x-8 scale-95 pointer-events-none"
+          className={`absolute bottom-full left-1/2 mb-3 sm:top-1/2 sm:left-auto sm:right-16 sm:bottom-auto sm:mb-0 sm:-translate-y-1/2 ${
+            (isTooltipVisible || autoShowTooltip) ? "pointer-events-none" : "pointer-events-none"
           }`}
         >
-          <div className="flex items-center gap-2">
-            <div className={`w-2 h-2 rounded-full ${isOnline ? 'bg-green-500' : 'bg-gray-400'} animate-pulse`}></div>
-            <div>
-              <div className="font-semibold text-sm text-gray-800">Vamos planejar seu casamento?</div>
-              <div className="text-xs text-gray-500">
-                {isOnline ? "🟢 Atendimento online agora" : "🔴 Respondemos em breve"}
+          <div
+            className={`relative -translate-x-1/2 sm:translate-x-0 bg-white text-gray-800 rounded-xl shadow-xl px-4 py-3 transition-all duration-500 whitespace-nowrap border border-gray-100 ${
+              (isTooltipVisible || autoShowTooltip)
+                ? "opacity-100 transform translate-x-0 scale-100"
+                : "opacity-0 transform translate-x-8 scale-95"
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              <div className={`w-2 h-2 rounded-full ${isOnline ? 'bg-green-500' : 'bg-gray-400'} animate-pulse`}></div>
+              <div>
+                <div className="font-semibold text-sm text-gray-800">Vamos planejar seu casamento?</div>
+                <div className="text-xs text-gray-500">
+                  {isOnline ? "🟢 Atendimento online agora" : "🔴 Respondemos em breve"}
+                </div>
               </div>
             </div>
+            <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1.5 w-3 h-3 bg-white transform rotate-45 border-r border-b border-gray-100 sm:top-1/2 sm:left-auto sm:-right-1.5 sm:mt-0 sm:-translate-y-1/2 sm:translate-x-0 sm:border-r sm:border-b sm:border-l-0 sm:border-t-0"></div>
           </div>
-          <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1.5 w-3 h-3 bg-white transform rotate-45 border-r border-b border-gray-100 sm:top-1/2 sm:left-auto sm:-right-1.5 sm:mt-0 sm:-translate-y-1/2 sm:translate-x-0 sm:border-r sm:border-b sm:border-l-0 sm:border-t-0"></div>
         </div>
 
         {/* Minimize Button */}
