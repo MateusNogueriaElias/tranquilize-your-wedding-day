@@ -71,8 +71,8 @@ const WhatsAppFloatingButton = () => {
           <div
             className={`relative -translate-x-1/2 sm:translate-x-0 bg-white text-gray-800 rounded-xl shadow-xl px-4 py-3 transition-all duration-500 whitespace-nowrap border border-gray-100 ${
               (isTooltipVisible || autoShowTooltip)
-                ? "opacity-100 transform translate-x-0 scale-100"
-                : "opacity-0 transform translate-x-8 scale-95"
+                ? "opacity-100 transform scale-100"
+                : "opacity-0 transform scale-95 sm:translate-x-8"
             }`}
           >
             <div className="flex items-center gap-2">
