@@ -60,11 +60,11 @@ const WhatsAppFloatingButton = () => {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-4 right-4 z-50 sm:bottom-6 sm:right-6">
       <div className="relative">
         {/* Tooltip */}
         <div
-          className={`absolute top-1/2 right-16 -translate-y-1/2 bg-white text-gray-800 rounded-xl shadow-xl px-4 py-3 transition-all duration-500 whitespace-nowrap border border-gray-100 ${
+          className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-3 sm:top-1/2 sm:left-auto sm:right-16 sm:bottom-auto sm:mb-0 sm:-translate-y-1/2 sm:translate-x-0 bg-white text-gray-800 rounded-xl shadow-xl px-4 py-3 transition-all duration-500 whitespace-nowrap border border-gray-100 ${
             (isTooltipVisible || autoShowTooltip)
               ? "opacity-100 transform translate-x-0 scale-100"
               : "opacity-0 transform translate-x-8 scale-95 pointer-events-none"
@@ -79,7 +79,7 @@ const WhatsAppFloatingButton = () => {
               </div>
             </div>
           </div>
-          <div className="absolute top-1/2 -right-2 -translate-y-1/2 w-4 h-4 bg-white transform rotate-45 border-r border-b border-gray-100"></div>
+          <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1.5 w-3 h-3 bg-white transform rotate-45 border-r border-b border-gray-100 sm:top-1/2 sm:left-auto sm:-right-1.5 sm:mt-0 sm:-translate-y-1/2 sm:translate-x-0 sm:border-r sm:border-b sm:border-l-0 sm:border-t-0"></div>
         </div>
 
         {/* Minimize Button */}
