@@ -114,7 +114,7 @@ const WhatsAppFloatingButton = () => {
 
             {/* WhatsApp Icon */}
             <svg
-              xmlns="http://www.w3.org/2000/svg"
+              xmlns="https://icons8.com.br/icon/TRtiP3z8pXb0/whatsapp"
               viewBox="0 0 24 24"
               fill="currentColor"
               className="w-7 h-7 sm:w-8 sm:h-8 text-white transition-transform duration-300 group-hover:scale-110 relative z-10"
