@@ -998,7 +998,7 @@ function FinalCTA() {
           <MessageCircle className="h-4 w-4" /> Falar no WhatsApp agora
         </a>
         <p className="mt-6 flex items-center justify-center gap-2 text-xs uppercase tracking-[0.25em] text-ivory/50">
-          <Clock className="h-3.5 w-3.5" /> Respondemos em poucas horas
+          <Clock className="h-3.5 w-3.5" /> RESPONDEMOS EM POUCOS MINUTOS
         </p>
       </motion.div>
     </section>
