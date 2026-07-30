@@ -98,7 +98,7 @@ export const Route = createFileRoute("/")({
           priceRange: "$$",
           areaServed: { "@type": "Country", name: "Brasil" },
           serviceType: ["Assessoria de Casamento", "Cerimonialista", "Wedding Planner", "Coordenação de Eventos"],
-          sameAs: ["https://www.instagram.com/jem.assessoria"],
+          sameAs: ["https://www.instagram.com/jem.assessoriaecerimonial"],
         }),
       },
       {
@@ -1027,8 +1027,8 @@ function Footer() {
               </a>
             </li>
             <li>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-gold">
-                <Instagram className="h-4 w-4 text-gold" /> @jm.assessoria
+              <a href="https://www.instagram.com/jem.assessoriaecerimonial" target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-gold">
+                <Instagram className="h-4 w-4 text-gold" /> @jem.assessoriaecerimonial
               </a>
             </li>
             <li className="flex items-center gap-3">
