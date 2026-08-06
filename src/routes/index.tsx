@@ -908,7 +908,7 @@ function Testimonials() {
                 key={i}
                 aria-label={`Ir para depoimento ${i + 1}`}
                 onClick={() => api?.scrollTo(i)}
-                className="-mx-[18px] -my-[19px] flex h-11 w-11 items-center justify-center"
+                className="-my-[19px] flex h-11 w-6 items-center justify-center"
               >
                 <span
                   aria-hidden
