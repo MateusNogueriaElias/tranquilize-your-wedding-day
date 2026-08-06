@@ -86,18 +86,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "preload", as: "font", type: "font/woff2", href: "/fonts/work-sans-normal-300_600-latin.woff2", crossOrigin: "anonymous" },
+      { rel: "preload", as: "font", type: "font/woff2", href: "/fonts/instrument-serif-normal-400-latin.woff2", crossOrigin: "anonymous" },
       { rel: "preconnect", href: "https://www.googletagmanager.com" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@300;400;500;600&display=swap" },
     ],
     scripts: [
       {
-        children: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MF3XXKBJ');`,
-      },
-      { src: "https://www.googletagmanager.com/gtag/js?id=G-RQKV1M0HGD", async: true },
-      {
-        children: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-RQKV1M0HGD');`,
+        // dataLayer/gtag ficam disponíveis imediatamente (eventos são enfileirados),
+        // mas os scripts pesados do GTM/GA4 são injetados só após o load/primeira
+        // interação — sem bloquear a renderização inicial.
+        children: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-RQKV1M0HGD');dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});(function(){var loaded=false;function load(){if(loaded)return;loaded=true;var d=document,f=d.getElementsByTagName('script')[0];['https://www.googletagmanager.com/gtm.js?id=GTM-MF3XXKBJ','https://www.googletagmanager.com/gtag/js?id=G-RQKV1M0HGD'].forEach(function(src){var j=d.createElement('script');j.async=true;j.src=src;f.parentNode.insertBefore(j,f);});}['pointerdown','keydown','touchstart','scroll'].forEach(function(e){window.addEventListener(e,load,{once:true,passive:true});});if(document.readyState==='complete'){setTimeout(load,1500);}else{window.addEventListener('load',function(){setTimeout(load,1500);});}})();`,
       },
     ],
   }),

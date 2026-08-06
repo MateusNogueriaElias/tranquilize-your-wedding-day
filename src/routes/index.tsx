@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import WhatsAppFloatingButton from "@/components/WhatsAppFloatingButton";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, lazy, Suspense } from "react";
 import { motion } from "motion/react";
 import Autoplay from "embla-carousel-autoplay";
 import {
@@ -31,16 +31,15 @@ import {
 } from "lucide-react";
 
 import hero from "@/assets/hero.jpg";
+import hero640 from "@/assets/hero-640.webp";
+import hero1024 from "@/assets/hero-1024.webp";
+import hero1600 from "@/assets/hero-1600.webp";
+
+const HERO_SRCSET = `${hero640} 640w, ${hero1024} 1024w, ${hero1600} 1600w`;
+const HERO_SIZES = "100vw";
 import jessikaAsset from "@/assets/jessika.webp.asset.json";
 const jessika = jessikaAsset.url;
-import g1 from "@/assets/g1.jpg";
-import g2 from "@/assets/g2.jpg";
-import g3 from "@/assets/g3.jpg";
-import g4 from "@/assets/g4.jpg";
-import g5 from "@/assets/g5.jpg";
-import g6 from "@/assets/g6.jpg";
-import g7 from "@/assets/g7.jpg";
-import g8 from "@/assets/g8.jpg";
+import g8 from "@/assets/g8.webp";
 import depo1 from "@/assets/depo1.jpg.asset.json";
 import depo2 from "@/assets/depo2.jpg.asset.json";
 import depo3 from "@/assets/depo3.jpg.asset.json";
@@ -48,7 +47,9 @@ import depo4 from "@/assets/depo4.jpg.asset.json";
 import depo5 from "@/assets/depo5.jpg.asset.json";
 import appMockupAsset from "@/assets/app-mockup.jpg.asset.json";
 import { albums } from "@/data/albums";
-import { AlbumLightbox } from "@/components/AlbumLightbox";
+const AlbumLightbox = lazy(() =>
+  import("@/components/AlbumLightbox").then((m) => ({ default: m.AlbumLightbox })),
+);
 const appMockup = appMockupAsset.url;
 
 const SITE_URL = "https://tranquilize-your-wedding-day.lovable.app";
@@ -81,7 +82,7 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "canonical", href: SITE_URL + "/" },
-      { rel: "preload", as: "image", href: hero, fetchpriority: "high" } as never,
+      { rel: "preload", as: "image", href: hero1600, imagesrcset: HERO_SRCSET, imagesizes: HERO_SIZES, fetchpriority: "high" } as never,
     ],
     scripts: [
       {
@@ -241,12 +242,14 @@ function Hero() {
   return (
     <section id="inicio" className="relative min-h-[100vh] w-full overflow-hidden bg-ink">
       <img
-        src={hero}
+        src={hero1600}
+        srcSet={HERO_SRCSET}
+        sizes={HERO_SIZES}
         alt="Noiva em momento sereno no pôr do sol"
         width={1600}
         height={1200}
         fetchPriority="high"
-        decoding="async"
+        decoding="sync"
         className="absolute inset-0 h-full w-full object-cover opacity-70"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/40 to-ink" />
@@ -738,7 +741,11 @@ function Gallery() {
         </div>
       </div>
 
-      <AlbumLightbox album={activeAlbum} onClose={() => setActiveSlug(null)} />
+      {activeAlbum ? (
+        <Suspense fallback={null}>
+          <AlbumLightbox album={activeAlbum} onClose={() => setActiveSlug(null)} />
+        </Suspense>
+      ) : null}
     </section>
   );
 }
@@ -901,10 +908,15 @@ function Testimonials() {
                 key={i}
                 aria-label={`Ir para depoimento ${i + 1}`}
                 onClick={() => api?.scrollTo(i)}
-                className={`h-1.5 rounded-full transition-all ${
-                  selected === i ? "w-8 bg-gold" : "w-2 bg-border hover:bg-gold/50"
-                }`}
-              />
+                className="-my-[19px] flex h-11 w-6 items-center justify-center"
+              >
+                <span
+                  aria-hidden
+                  className={`block h-1.5 rounded-full transition-all ${
+                    selected === i ? "w-8 bg-gold" : "w-2 bg-border hover:bg-gold/50"
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </div>
@@ -1048,7 +1060,7 @@ function Footer() {
           </a>
         </div>
       </div>
-      <div className="mx-auto mt-14 max-w-7xl border-t border-ivory/10 px-6 pt-6 text-center text-xs tracking-wide text-ivory/40 md:px-10">
+      <div className="mx-auto mt-14 max-w-7xl border-t border-ivory/10 px-6 pt-6 text-center text-xs tracking-wide text-ivory/60 md:px-10">
         © {new Date().getFullYear()} J&amp;M Assessoria de Casamentos. Todos os direitos reservados.
       </div>
     </footer>
