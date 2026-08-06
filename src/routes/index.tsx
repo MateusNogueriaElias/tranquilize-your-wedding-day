@@ -37,20 +37,20 @@ import hero1600 from "@/assets/hero-1600.webp";
 
 const HERO_SRCSET = `${hero640} 640w, ${hero1024} 1024w, ${hero1600} 1600w`;
 const HERO_SIZES = "100vw";
-import jessikaAsset from "@/assets/jessika.webp.asset.json";
-const jessika = jessikaAsset.url;
+import jessikaAsset from "@/assets/jessika.webp";
+const jessika = jessikaAsset;
 import g8 from "@/assets/g8.webp";
-import depo1 from "@/assets/depo1.jpg.asset.json";
-import depo2 from "@/assets/depo2.jpg.asset.json";
-import depo3 from "@/assets/depo3.jpg.asset.json";
-import depo4 from "@/assets/depo4.jpg.asset.json";
-import depo5 from "@/assets/depo5.jpg.asset.json";
-import appMockupAsset from "@/assets/app-mockup.jpg.asset.json";
+import depo1 from "@/assets/depo1.jpg";
+import depo2 from "@/assets/depo2.jpg";
+import depo3 from "@/assets/depo3.jpg";
+import depo4 from "@/assets/depo4.jpg";
+import depo5 from "@/assets/depo5.jpg";
+import appMockupAsset from "@/assets/app-mockup.jpg";
 import { albums } from "@/data/albums";
 const AlbumLightbox = lazy(() =>
   import("@/components/AlbumLightbox").then((m) => ({ default: m.AlbumLightbox })),
 );
-const appMockup = appMockupAsset.url;
+const appMockup = appMockupAsset;
 
 const SITE_URL = "https://tranquilize-your-wedding-day.lovable.app";
 
@@ -831,11 +831,11 @@ function Differentials() {
 
 function Testimonials() {
   const prints = [
-    { src: depo1.url, name: "Gabriela" },
-    { src: depo2.url, name: "Gabriela" },
-    { src: depo3.url, name: "Elaine — Milena" },
-    { src: depo4.url, name: "Ana & Bruno" },
-    { src: depo5.url, name: "Carol & Leandro" },
+    { src: depo1, name: "Gabriela" },
+    { src: depo2, name: "Gabriela" },
+    { src: depo3, name: "Elaine — Milena" },
+    { src: depo4, name: "Ana & Bruno" },
+    { src: depo5, name: "Carol & Leandro" },
   ];
 
   const autoplay = useRef(
