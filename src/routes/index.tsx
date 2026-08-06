@@ -908,14 +908,15 @@ function Testimonials() {
                 key={i}
                 aria-label={`Ir para depoimento ${i + 1}`}
                 onClick={() => api?.scrollTo(i)}
-                className="flex h-11 w-11 items-center justify-center"
+                className="-mx-[18px] -my-[19px] flex h-11 w-11 items-center justify-center"
               >
                 <span
                   aria-hidden
                   className={`block h-1.5 rounded-full transition-all ${
                     selected === i ? "w-8 bg-gold" : "w-2 bg-border hover:bg-gold/50"
                   }`}
-              />
+                />
+              </button>
             ))}
           </div>
         </div>
