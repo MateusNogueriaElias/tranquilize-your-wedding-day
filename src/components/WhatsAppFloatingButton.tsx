@@ -49,6 +49,7 @@ const WhatsAppFloatingButton = () => {
       <div className="fixed bottom-6 right-6 z-50">
         <button
           onClick={() => setIsMinimized(false)}
+          aria-label="Restaurar botão do WhatsApp"
           className="w-10 h-10 bg-gray-600 hover:bg-gray-700 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center"
         >
           <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -85,6 +86,7 @@ const WhatsAppFloatingButton = () => {
         {/* Minimize Button */}
         <button
           onClick={() => setIsMinimized(true)}
+          aria-label="Minimizar botão do WhatsApp"
           className="absolute -top-2 -left-2 w-6 h-6 bg-gray-500 hover:bg-gray-600 rounded-full shadow-md transition-all duration-200 flex items-center justify-center opacity-0 hover:opacity-100 group-hover:opacity-100"
         >
           <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -98,6 +100,7 @@ const WhatsAppFloatingButton = () => {
             href={whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Falar com a J&M no WhatsApp"
             className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 rounded-full shadow-xl transition-all duration-300 transform hover:scale-110 active:scale-95 relative overflow-hidden"
             onMouseEnter={() => setIsTooltipVisible(true)}
             onMouseLeave={() => setIsTooltipVisible(false)}

@@ -1060,7 +1060,7 @@ function Footer() {
           </a>
         </div>
       </div>
-      <div className="mx-auto mt-14 max-w-7xl border-t border-ivory/10 px-6 pt-6 text-center text-xs tracking-wide text-ivory/40 md:px-10">
+      <div className="mx-auto mt-14 max-w-7xl border-t border-ivory/10 px-6 pt-6 text-center text-xs tracking-wide text-ivory/60 md:px-10">
         © {new Date().getFullYear()} J&amp;M Assessoria de Casamentos. Todos os direitos reservados.
       </div>
     </footer>
